@@ -15,4 +15,8 @@ Observações:
 
 Os métodos da Api REST PUT e DELETE foram modificados para POST e GET, por causa de alguns erros ao consumi-los. Está foi a única manenira que encontrei para que funcionasse através de urls únicas.
 
+Instalar o pacote "ngx-toastr":
+
+\> npm install ngx-toastr --save
+
 
