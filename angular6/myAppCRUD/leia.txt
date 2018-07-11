@@ -1,0 +1,67 @@
+	
+	Angular versão 6	
+
+	Comandos usados no projeto:
+
+	comando para criar um novo aplicativo:
+	
+	\> ng new appCrud
+
+	acessando a pasta do aplicativo:
+
+	\> cd appCrud
+	
+	comando para iniciar o servidor:
+
+	\> ng serve
+
+	comando para criar um componente:
+
+	\> ng g c produtos
+
+	acesse a pasta produtos:
+
+	\> cd src/app/produtos
+
+	outros componentes:
+
+	\> ng g c produto
+	
+	\> ng g c produto-list
+
+	criar uma nova pasta:
+
+	\> mkdir shared
+
+	acessar a pasta:
+
+	\> cd shared
+
+	criar um serviço:
+
+	\> ng g s produto
+
+	criar uma classe:
+
+	\> ng g class produto.model
+
+	instalar biblioteca de animações:
+
+	\> npm install ngx-toastr --save
+
+	\> npm install @angular/animations --save
+
+	acessar o arquivo angular.json e no parametro "styles" adicione o caminho "./node_modules/ngx-toastr/toastr.css"
+
+
+	
+
+ 
+	
+
+
+
+
+	
+	
+

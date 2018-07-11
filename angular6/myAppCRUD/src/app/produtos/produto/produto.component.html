@@ -1,0 +1,41 @@
+  <form method="POST" class="prod-form" #frm="ngForm"  (ngSubmit)="onSubmit(frm)">
+    
+    <input type="hidden" class="form-control" id="id" name="id"  [(ngModel)]="produtoService.selectedProduto.id" />
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+          <input type="text" class="form-control" id="descricao" 
+          name="descricao" placeholder="Descrição" 
+          [(ngModel)]="produtoService.selectedProduto.descricao" required />
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+          <input type="text" class="form-control" id="quantidade" 
+          name="quantidade" placeholder="Quantidade"
+          [(ngModel)]="produtoService.selectedProduto.quantidade" required>
+      </div>
+
+      <div class="form-group col-md-6">
+          <input type="text" class="form-control" id="valor" 
+          name="valor" placeholder="Valor" 
+          [(ngModel)]="produtoService.selectedProduto.valor" required>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+          <button type="submit" class="btn btn-outline-dark btn-lg btn-block"
+          [disabled]="frm.invalid"> <i class="fas fa-save"></i> Submit </button>
+      </div>
+
+      <div class="form-group col-md-4">
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block"
+          (click)="resetForm(frm)"> <i class="fas fa-undo"></i> Limpar</button>
+      </div>
+    </div>
+  
+  </form>
