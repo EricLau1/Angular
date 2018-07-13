@@ -13,6 +13,7 @@ export class ProdutoService {
   produtosUrl = 'http://localhost:3000/produtos';
 
   selectedProduto : Produto;
+  produtoList: Array<Produto>;
 
   // parametro adicionado manualmente
   constructor(private httpClient : HttpClient) { }
@@ -71,7 +72,4 @@ export class ProdutoService {
     return parseInt(r + "");
   }
 
-  reloadPage() {
-    window.location.href = 'http://localhost:4200';
-  }
 }

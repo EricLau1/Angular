@@ -13,15 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 export class ProdutoListComponent implements OnInit {
 
   // adicionado manualmente
-  produtos : Array<Produto>
-
-  // adicionado manualmente
   constructor(private produtoService: ProdutoService,  private toastr: ToastrService) { }
 
   ngOnInit() {
 
     // adicionado manualmente
-    this.produtoService.getProdutos().subscribe(dados => this.produtos = dados);
+    this.produtoService.getProdutos().
+      subscribe(dados => this.produtoService.produtoList = dados);
 
   }
 
@@ -44,7 +42,7 @@ export class ProdutoListComponent implements OnInit {
       this.produtoService.deleteProduto(produto.id).subscribe(
         resposta => {
           this.toastr.error('Item deletado com sucesso!', 'Produto deletado');
-          this.produtos = this.produtos.filter(p => p !== produto);
+          this.produtoService.produtoList = this.produtoService.produtoList.filter(p => p !== produto);
           console.log(resposta);
         } 
       );

@@ -15,23 +15,18 @@ import { ProdutoListComponent } from '../produto-list/produto-list.component';
 })
 export class ProdutoComponent implements OnInit {
 
-  // variavel criada manualmente
-  produto : Produto;
-
+ 
   // parametros criados manualmente
   constructor(private produtoService: ProdutoService, private toastr: ToastrService) { }
 
   ngOnInit() {
     
-    // criado manualmente
-    this.produto =  {
+    this.produtoService.selectedProduto =  {
       id : null,
       descricao : '',
       quantidade : null,
       valor : null
     };
-
-    this.produtoService.selectedProduto = this.produto;
 
     // criado manualmente
     this.resetForm();
@@ -64,10 +59,9 @@ export class ProdutoComponent implements OnInit {
       this.produtoService.putProduto(form.value).subscribe(
         resposta => { 
         console.log(resposta);
-        this.resetForm(form);
         this.toastr.info('Item atualizado com sucesso!', 'Produto editado');
-        this.toastr.warning('E necessário atualizar a pagina para visualizar o novo produto', 'Aviso');
-        //this.produtoService.reloadPage();
+        this.updateList(form.value);
+        this.resetForm(form);
         return true },
         error => {
         console.error("Erro ao atualizar produto!");
@@ -80,11 +74,9 @@ export class ProdutoComponent implements OnInit {
       this.produtoService.postProduto(form.value).subscribe(
         resposta => { 
         console.log(resposta);
-        this.produtoService.getProdutos();
-        this.resetForm(form);
         this.toastr.success('Novo item adicionado com sucesso!', 'Resgistro de produto');
-        this.toastr.warning('E necessário atualizar a pagina para visualizar as modificações', 'Aviso');
-        //this.produtoService.reloadPage();
+        this.produtoService.produtoList.push(form.value);
+        this.resetForm(form);
         return true },
         error => {
         console.error("Erro ao salvar produto!");
@@ -93,5 +85,24 @@ export class ProdutoComponent implements OnInit {
     }
 
   } // fim metodo
+
+  // criado manualmente
+  updateList(produto: Produto) {
+
+    if(produto != null) {
+
+      for(let i = 0; i < this.produtoService.produtoList.length; i++) {
+
+        if ( produto.id == this.produtoService.produtoList[i].id ) {
+
+          this.produtoService.produtoList[i] = produto;
+
+          console.log('atualização realizada com sucesso!');
+        } // fim if
+
+      } // fim for
+      
+    } // fim if
+  }
 
 }
