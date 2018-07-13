@@ -1,0 +1,7 @@
+<h1>Produtos</h1>
+<ul [@listStagger]="produtos$">
+  <li *ngFor="let produto of produtos$">
+    <a routerLink="/detalhes/{{ produto.id }}"> {{ produto.descricao }} </a>
+
+  </li>
+</ul>

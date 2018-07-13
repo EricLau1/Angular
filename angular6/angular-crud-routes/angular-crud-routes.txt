@@ -1,0 +1,416 @@
+
+	comando para iniciar projeto:
+
+	\> ng new myApp1 --style=scss --routing
+
+	criando componentes:
+
+	\> ng g c sidebar
+
+	\> ng g c produtos
+
+	\> ng g c detalhes
+
+	conteudo do arquivo index.html:
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyApp1</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300, 700" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+	conteudo do arquivo sidebar.component.html:
+
+<nav>
+  <ul>
+    <li>
+      <a routerLink="">
+          <i class="material-icons">
+             view_list
+          </i>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="">
+          <i class="material-icons">
+              add_box
+          </i>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+
+
+	conteudo do arquivo app.component.html:
+
+<div id="container">
+
+  <app-sidebar></app-sidebar>
+
+  <div id="content">
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>
+
+
+
+	conteudo do arquivo styles.scss:
+
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 70px auto;
+    height: 100%;
+
+    #content {
+        padding: 30px 50px;
+
+        ul {
+            list-style-type: none;
+            margin:0; padding: 0;
+
+            li {
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 8px;
+
+                a {
+                    font-size: 1.5em;
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: #00A8FF;
+                }
+
+            }
+        }
+
+        table {
+
+            tr {
+                td {
+                    padding: 20px;
+                }
+            }
+            
+        }
+    }
+}
+
+
+	conteudo do arquivo sidebar.component.scss:
+
+nav {
+    background: #2D2E2E;
+    height: 100%;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+
+            a {
+                color: #fff;
+                padding: 20px;
+                display: block;
+            }
+
+            .activated {
+                background-color: #00a8ff;
+            }
+        }
+    }
+}
+
+
+	Importar os componentes no arquivo app-routing.module.ts:
+
+import { DetalhesComponent } from './detalhes/detalhes.component';
+import { ProdutosComponent } from './produtos/produtos.component';
+
+	Adicionar as Rotas com o caminho e o nome do componente no arquivo app-routing.module.ts:
+
+const routes: Routes = [ 
+  {
+    path: '',
+    component: ProdutosComponent
+  },
+  {
+    path: 'detalhes/:id',
+    component: DetalhesComponent
+  }
+];
+
+	Criar um serviço:
+
+	\> ng g s produto
+
+	importar o HttpClient no arquivo produto.service.ts:
+
+import { HttpClient } from '@angular/common/http';
+
+	
+	conteudo do arquivo produto.service.ts:
+
+import { Injectable } from '@angular/core';
+
+//adicionado manualmente
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProdutoService {
+
+  // modificado manualmente
+  constructor(private http: HttpClient) { }
+
+  // criado manualmente
+  getProdutos() {
+    return this.http.get('http://localhost:3000/produtos');
+  }
+  
+}
+
+	Importe o HttpClientModule para o arquivo app.module.ts :
+
+import { HttpClientModule } from '@angular/common/http';
+
+
+	Adicione o HttpClientModule ao vetor de imports no arquivo app.module.ts : 
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ]
+
+
+	Necessário importar os seguintes pacotes no arquivo produtos.component.ts:
+
+import { ProdutoService } from '../produto.service';
+import { Observable } from 'rxjs';
+
+
+	Após isso crie um Array de objetos:
+
+produtos$: Object;
+
+	Adicione o serviço como parametro do construtor:
+
+constructor(private produtoService: ProdutoService) { }
+
+	Utilize o método getProdutos do ProdutoService para preencher o Array de objetos produtos$ dentro do método ngOnInit:
+
+  ngOnInit() {
+
+    this.produtoService.getProdutos().subscribe(
+      dados => this.produtos$ = dados
+    );
+
+  }
+
+	modifique o HTML do arquivo produtos.component.html:
+
+
+<h1>Produtos</h1>
+
+<ul>
+  <li *ngFor="let produto of produtos$">
+    <a routerLink="/detalhes/{{ produto.id }}"> {{ produto.descricao }} </a>
+
+    <ul>
+      <li> {{ produto.quantidade }} </li>
+      <li> {{ produto.valor }} </li>
+    </ul>
+  </li>
+</ul>
+
+	Adicione o codigo a seguir ao arquivo produto.service.ts:
+
+  getProduto(produtoId) {
+    return this.http.get('http://localhost:3000/produtos/' + produtoId);
+  }
+
+	Faça as seguintes importações para o arquivo detalhes.component.ts:
+
+import { ProdutoService } from '../produto.service';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
+	Crie uma variavel objeto no arquivo detalhes.component.ts:
+
+produto$: Object;
+
+	modifique o construtor do arquivo detalhes.component.ts:
+
+  constructor(private produtoService: ProdutoService, private route : ActivatedRoute) { 
+    this.route.params.subscribe( params => this.produto$ = params.id );
+  }
+
+
+	modifique o metodo ngOnInit do arquivo detalhes.component.ts:
+
+  ngOnInit() {
+
+    this.produtoService.getProduto(this.produto$).
+      subscribe(dados => this.produto$ = dados);
+  }
+
+	Adicione o codigo HTML ao arquivo detalhes.component.html:
+
+<div *ngIf="produto$">
+  <h1> {{ produto$.descricao }}</h1>
+  <table>
+      <tr>
+        <td><strong>Quantidade</strong> </td> <td> {{ produto$.quantidade }} </td>
+      </tr>
+      <tr>
+          <td><strong>Valor</strong> </td> <td> {{ produto$.valor }} </td>
+      </tr>
+    </table>
+</div>
+
+
+	Faça as importações no arquivo sidebar.component.ts:
+
+import { Router, NavigationEnd } from '@angular/router';
+
+	crie uma variavel:
+
+currentUrl : string;
+
+	modifique o construtor:
+
+  constructor(private router: Router) { 
+    this.router.events.subscribe(
+      ( _: NavigationEnd) => this.currentUrl = _.url
+    );
+  }
+
+	Modifique o arquivo sidebar.component.html:
+
+<nav>
+  <ul>
+    <li>
+      <a routerLink="" [class.activated]="currentUrl == '/'">
+          <i class="material-icons">
+             view_list
+          </i>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="">
+          <i class="material-icons">
+              add_box
+          </i>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+
+	execute o comando caso ainda nao tenha o pacote instalado:
+
+	\> npm install @angular/animations@latest --save
+
+	Importação necessária no arquivo app.module.ts:
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
+	E adicione o BrowserAnimationsModule ao vetor de imports do arquivo app.module.ts :
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule
+  ]
+
+
+	importe os seguintes itens no arquivo produtos.component.ts:
+
+import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
+
+	
+	Adicione o codigo ao decorator da @Component da classe ProdutosComponent no arquivo produtos.component.ts:
+
+@Component({
+  selector: 'app-produtos',
+  templateUrl: './produtos.component.html',
+  styleUrls: ['./produtos.component.scss'],
+  animations:[
+    trigger('listStagger', [
+      transition('* <=> *', [
+        query(':enter', 
+        [
+          style({ opacity: 0, transform: 'translateY(-15px)'}),
+          stagger('50ms',
+          animate('550ms ease-out',
+          style( {opacity: 1, transform: 'translateY(0px)'} )))
+        ], { optional: true } ),
+        query(':leave', animate('550ms ease-out', style( { opacity: 0 } )), { 
+          optional: true 
+        })
+      ])
+    ])
+  ]
+})
+
+	Modifique o HTML do arquivo produtos.component.html:
+
+<h1>Produtos</h1>
+
+<ul [@listStagger]="produtos$">
+  <li *ngFor="let produto of produtos$">
+    <a routerLink="/detalhes/{{ produto.id }}"> {{ produto.descricao }} </a>
+
+  </li>
+</ul>
+
+	Modifique o HTML do arquivo detalhes.component.html:
+
+<div *ngIf="produto$">
+  <h1> {{ produto$.descricao }}</h1>
+
+  <ul>
+    <li><strong>Quantidade</strong> {{ produto$.quantidade }} </li>
+    <li><strong>Valor</strong> {{ produto$.valor }} </li>
+  </ul>
+</div>
+
+	agora visualize a aplicação:
+
+	\> ng serve
+
+	end!

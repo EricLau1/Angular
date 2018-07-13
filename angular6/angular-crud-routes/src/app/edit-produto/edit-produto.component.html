@@ -1,0 +1,25 @@
+<h1>Editar Produto</h1>
+<form *ngIf="produto$" action="POST" #frm="ngForm" (ngSubmit)="onEdit(frm)">
+
+  <input type="hidden" name="id" id="id" [(ngModel)]="produto$.id">
+
+  <input type="text" name="descricao" id="descricao" 
+    [(ngModel)]="produto$.descricao" value= required> <br><br>
+  
+  <input type="text" name="quantidade" id="quantidade" 
+    [(ngModel)]="produto$.quantidade" placeholder="Quantidade" required> <br><br>
+
+  <input type="text" name="valor" id="valor" 
+    [(ngModel)]="produto$.valor" placeholder="Valor" required> <br><br>
+
+  <button type="submit" [disabled]="frm.invalid" class="btn-form">
+      <i class="material-icons">
+          save
+      </i>
+  </button>
+  <button type="reset" class="btn-form">
+      <i class="material-icons">
+        settings_backup_restore
+      </i>
+  </button>
+</form>

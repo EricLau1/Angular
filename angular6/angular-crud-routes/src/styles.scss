@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 70px auto;
+    height: 100%;
+
+    #content {
+        padding: 30px 50px;
+
+        ul {
+            list-style-type: none;
+            margin:0; padding: 0;
+
+            li {
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 8px;
+
+                a {
+                    font-size: 1.5em;
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: #00A8FF;
+                }
+
+            }
+        }
+
+        table {
+
+            tr {
+                td {
+                    padding: 20px;
+                }
+            }
+            
+        }
+
+
+        button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f2f2f2;
+            color: #2D2E2E;
+            border: 2px solid #2D2E2E;
+            transition: .3s ease;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #2D2E2E;
+            color: #f2f2f2;
+        }
+
+        form {
+
+            input {
+                width: 50%;
+                height: 26px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 16px;
+                color: #606060;
+                border-radius: 5px;
+                border: 1px solid silver;
+                padding: 5px 10px;
+            }
+            input:focus {
+                outline: none;
+            }
+        }
+    }
+}

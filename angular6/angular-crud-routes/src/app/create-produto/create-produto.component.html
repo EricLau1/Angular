@@ -1,0 +1,23 @@
+<h1>Cadastro de Produto</h1>
+<form action="POST" #frm="ngForm" (ngSubmit)="onSubmit(frm)">
+
+  <input type="text" name="descricao" id="descricao" 
+    [(ngModel)]="produto.descricao" placeholder="Descrição" required> <br><br>
+  
+  <input type="text" name="quantidade" id="quantidade" 
+    [(ngModel)]="produto.quantidade" placeholder="Quantidade" required> <br><br>
+
+  <input type="text" name="valor" id="valor" 
+    [(ngModel)]="produto.valor" placeholder="Valor" required> <br><br>
+
+  <button type="submit" [disabled]="frm.invalid" class="btn-form">
+      <i class="material-icons">
+          save
+      </i>
+  </button>
+  <button type="reset" class="btn-form">
+      <i class="material-icons">
+        settings_backup_restore
+      </i>
+  </button>
+</form>

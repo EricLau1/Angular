@@ -1,0 +1,25 @@
+<div *ngIf="produto$">
+  <h1> {{ produto$.descricao }}</h1>
+  <table>
+      <tr>
+        <td><strong>Quantidade</strong> </td> <td> {{ produto$.quantidade }} </td>
+      </tr>
+      <tr>
+          <td><strong>Valor</strong> </td> <td> {{ produto$.valor }} </td>
+      </tr>
+
+    </table>
+
+    <button routerLink="/edit_produto/{{ produto$.id}}"> 
+      <i class="material-icons">
+        edit
+      </i>
+    </button>
+    
+    <button type="button" (click)="onDelete()">
+        <i class="material-icons">
+          delete_forever
+          </i>
+      </button>
+</div>
+
