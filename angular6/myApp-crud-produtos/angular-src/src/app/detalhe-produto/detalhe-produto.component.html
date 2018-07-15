@@ -1,0 +1,39 @@
+<div *ngIf="produto">
+
+  <h1>{{ produto.descricao }} </h1>
+
+  <table class="table">
+
+    <tr>
+        <td><strong>#</strong></td> 
+        <td> {{ produto.id }} </td>
+    </tr>
+
+    <tr>
+        
+        <td><strong>Quantidade Disponível</strong></td> 
+        <td> {{ produto.quantidade }}</td>
+    </tr>
+
+    <tr>
+        <td><strong>Valor Unitário</strong></td> 
+        <td> {{ produto.valor }}</td>
+    </tr>
+
+  </table>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+
+      <a routerLink="/editar/{{ produto.id }}" class="btn btn-outline-primary"> 
+        <i class="far fa-edit"></i>
+      </a>
+
+      <button type="button" class="btn btn-outline-danger" (click)="onDelete()" > 
+          <i class="fas fa-trash-alt"></i> 
+      </button>  
+        
+  </div>
+
+
+  
+</div>

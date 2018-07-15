@@ -1,0 +1,34 @@
+crud angular 6 consumindo api rest
+
+comando inicial:
+
+\> ng new myApp --routing
+
+componentes:
+
+\> ng g c menu
+
+\> ng g c list-produto
+
+\> ng g c detalhe-produto
+
+\> ng g c create-produto
+
+\> ng g c edit-produto
+
+criar a pasta shared.
+
+criar dentro dela a classe e o serviço:
+
+\> cd src/app/shared/
+
+\> ng g class produto.model
+
+\> ng g s produto
+
+agora é so começar a codificar!
+
+
+ 
+
+	

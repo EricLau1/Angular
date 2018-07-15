@@ -1,0 +1,30 @@
+<form method="POST" #frm="ngForm" (ngSubmit)="onSubmit(frm)">
+
+  <h1 class="my-0 mr-md-auto font-weight-normal ">Novo Produto</h1>
+  <br/>
+  <div class="form-group">
+    <label for="descricao">Nome do produto</label>
+    <input type="text" [(ngModel)]="produto.descricao" name="descricao" class="form-control" id="descricao" placeholder="Descrição" required>
+  </div>
+
+  <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="quantidade">Qtd. Estoque</label>
+        <input type="number" [(ngModel)]="produto.quantidade" name="quantidade" class="form-control" id="quantidade" placeholder="Quantidade" required>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="valor">Valor Unit.</label>
+        <input type="text" [(ngModel)]="produto.valor" name="valor" class="form-control" id="valor" placeholder="Preço" required>
+      </div>
+
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="submit" class="btn btn-outline-primary" [disabled]="!frm.valid"> <i class="far fa-save"></i> </button>
+      <button type="reset" class="btn btn-outline-dark"> <i class="fas fa-undo-alt"></i> </button>
+  </div>
+
+
+</form>
