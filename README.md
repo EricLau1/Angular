@@ -1,1 +1,1 @@
-Angular na Pratica!
+Angular 6+ para estudar.
