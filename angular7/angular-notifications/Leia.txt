@@ -1,0 +1,72 @@
+SEQUENCIA DE COMANDOS UTILIZADOS
+
+
+
+CRIAÇÃO DO PROJETO:
+
+
+
+> ng new myApp --routing
+
+
+
+ADICIONANDO O NGX-TOAST:
+
+
+
+> npm install ng6-toastr-notifications --save
+
+
+
+
+ADICIONE O TOASTMODULE AO ARQUIVO APP.MODULE.TS:
+
+
+
+import { BrowserModule } from '@angular/platform-browser';
+
+import { NgModule } from '@angular/core';
+
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+
+
+
+// adicionados manualmente
+import { ToastrModule } from 'ng6-toastr-notifications';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
+@NgModule({
+  
+ declarations: [
+    AppComponent
+  ],
+  
+ imports: [
+    
+  BrowserModule,
+    
+  AppRoutingModule,
+    
+  BrowserAnimationsModule, // adicionado manualmente
+    
+  ToastrModule.forRoot() // adicionado manualmente
+  
+ ],
+  
+ providers: [],
+  
+ bootstrap: [AppComponent]
+})
+
+export class AppModule { }
+
+
+
+
+Acesse o arquivo 'app.component.ts' para ver a implementação dos métodos.
