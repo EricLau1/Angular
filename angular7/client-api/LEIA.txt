@@ -1,0 +1,11 @@
+
+
+ng new client-api
+
+ng g s services/users
+
+ng g c login
+
+ng g c user
+
+ng g s guard/auth-guard
