@@ -1,0 +1,25 @@
+CanActivate: 
+
+    válida se a rota está ativa
+
+CanActivateChild: 
+
+    válida se a rota filha está ativa
+
+CanDeactivate: 
+
+    verifica se uma rota pode ser desativada
+
+Crie um service:
+
+ng g c login
+
+ng g c home
+
+ng g s guards/AuthGuard
+
+Adicione aos providers:
+
+    import { AuthGuardService } from './guards/auth-guard.service
+
+    providers: [AuthGuardService],
